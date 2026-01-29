@@ -38,7 +38,7 @@ const Questions = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   return (
-    <div className="bg-[#091333] min-h-screen flex justify-center py-16 px-4 sm:px-6">
+    <div className="bg-[#091333] flex justify-center py-16 px-4 sm:px-6">
       <div className="w-full max-w-4xl flex flex-col gap-10">
 
         <div className="text-center">

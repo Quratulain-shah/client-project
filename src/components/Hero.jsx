@@ -6,7 +6,7 @@ import { SlGraph } from "react-icons/sl";
 
 const Hero = () => {
   return (
-    <div className="bg-gradient-to-b from-[#04122E] to-[#071E41] min-h-screen pt-20 px-4 md:px-20">
+    <div className="bg-gradient-to-b from-[#04122E] to-[#071E41] pt-20 md:pt-32 px-4 md:px-20">
 
       <div className="bg-[#092149] flex justify-center items-center gap-4 h-9 rounded-3xl w-60 border-2 border-[#10326E] mx-auto md:mx-0">
         <BsLightningCharge className="text-[#00D3F3] w-5 h-5" />
