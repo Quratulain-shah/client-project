@@ -15,7 +15,7 @@ const Sections = () => {
   const navigate = useNavigate();
   const payments = ["Visa", "Mastercard", "Apple Pay"];
   return (
-    <div className="bg-gradient-to-b from-[#040f24] to-[#08244e] min-h-screen pt-20 sm:pt-24 lg:pt-28">
+    <div className="bg-gradient-to-b from-[#040f24] to-[#08244e] pb-10 pt-20 sm:pt-24 lg:pt-28">
       <div className="flex flex-col gap-6 p-4 sm:p-6 lg:p-8 max-w-[1600px] mx-auto">
         <div className="bg-[#081026] flex flex-col sm:flex-row justify-between w-full min-h-20 rounded-xl p-3 pt-4 border border-gray-700 gap-3 sm:gap-0">
           <div className="flex flex-row gap-3">
@@ -58,7 +58,9 @@ const Sections = () => {
 
             <div className="w-full p-3 flex flex-col sm:flex-row justify-between gap-2 sm:gap-0">
               <h1 className="text-gray-400 text-sm sm:text-md">Stake Amount</h1>
-              <h1 className="text-gray-400 text-sm sm:text-md">Balance: 1250.45 TON</h1>
+              <h1 className="text-gray-400 text-sm sm:text-md">
+                Balance: 1250.45 TON
+              </h1>
             </div>
 
             <div className="w-full p-3 h-14 flex justify-between items-center border border-gray-600 hover:border-2 hover:border-gray-400 rounded-xl">
@@ -71,7 +73,9 @@ const Sections = () => {
                 <h1 className="text-[#00D3F3] font-semibold text-lg sm:text-xl hover:bg-blue-100 hover:border rounded-md cursor-pointer px-1">
                   MAX
                 </h1>
-                <h1 className="text-gray-400 font-semibold text-lg sm:text-xl">TON</h1>
+                <h1 className="text-gray-400 font-semibold text-lg sm:text-xl">
+                  TON
+                </h1>
               </div>
             </div>
 
@@ -116,7 +120,9 @@ const Sections = () => {
               </div>
 
               <div className="flex flex-col gap-0">
-                <h1 className="text-white text-base sm:text-lg">Staking Calculator</h1>
+                <h1 className="text-white text-base sm:text-lg">
+                  Staking Calculator
+                </h1>
                 <h1 className="text-gray-400 text-sm">Estimate your rewards</h1>
               </div>
             </div>
@@ -125,7 +131,7 @@ const Sections = () => {
               <h1 className="text-gray-400 text-sm font-semibold">
                 Staking Amount (TON)
               </h1>
-              <div className="w-full p-3 sm:p-4 border-gray-800 rounded-xl border border-gray-600 hover:border-2 hover:border-gray-400">
+              <div className="w-full p-3 sm:p-4  rounded-xl border border-gray-700 hover:border-2 hover:border-gray-400">
                 <input
                   type="number"
                   placeholder="1000"
@@ -175,7 +181,9 @@ const Sections = () => {
                 <h1 className="text-sm sm:text-md font-semibold text-white">
                   Total Value
                 </h1>
-                <h1 className="text-lg sm:text-xl font-semibold text-white">0.00 TON</h1>
+                <h1 className="text-lg sm:text-xl font-semibold text-white">
+                  0.00 TON
+                </h1>
               </div>
             </div>
 
@@ -273,7 +281,9 @@ const Sections = () => {
                     <FaCoins className="w-5 h-5 sm:w-6 sm:h-6 text-[#00D3F3]" />
                   </div>
                   <div className="flex flex-col">
-                    <h1 className="text-white font-semibold text-sm sm:text-base">Stake</h1>
+                    <h1 className="text-white font-semibold text-sm sm:text-base">
+                      Stake
+                    </h1>
                     <h1 className="text-gray-400 text-xs sm:text-sm font-semibold">
                       2025-11-03
                     </h1>
@@ -281,7 +291,9 @@ const Sections = () => {
                 </div>
 
                 <div className="flex flex-col sm:text-right">
-                  <h1 className="text-white font-semibold text-sm sm:text-base">+100 STAKED</h1>
+                  <h1 className="text-white font-semibold text-sm sm:text-base">
+                    +100 STAKED
+                  </h1>
                   <h1 className="text-gray-400 font-semibold text-xs sm:text-sm">
                     completed
                   </h1>
@@ -294,7 +306,9 @@ const Sections = () => {
                     <FaCoins className="w-5 h-5 sm:w-6 sm:h-6 text-[#00D3F3]" />
                   </div>
                   <div className="flex flex-col">
-                    <h1 className="text-white font-semibold text-sm sm:text-base">Stake</h1>
+                    <h1 className="text-white font-semibold text-sm sm:text-base">
+                      Stake
+                    </h1>
                     <h1 className="text-gray-400 text-xs sm:text-sm font-semibold">
                       2025-10-28
                     </h1>
@@ -302,7 +316,9 @@ const Sections = () => {
                 </div>
 
                 <div className="flex flex-col sm:text-right">
-                  <h1 className="text-white font-semibold text-sm sm:text-base">+250 STAKED</h1>
+                  <h1 className="text-white font-semibold text-sm sm:text-base">
+                    +250 STAKED
+                  </h1>
                   <h1 className="text-gray-400 font-semibold text-xs sm:text-sm">
                     completed
                   </h1>
@@ -315,7 +331,9 @@ const Sections = () => {
                     <FaCoins className="w-5 h-5 sm:w-6 sm:h-6 text-[#00D3F3]" />
                   </div>
                   <div className="flex flex-col">
-                    <h1 className="text-white font-semibold text-sm sm:text-base">Reward</h1>
+                    <h1 className="text-white font-semibold text-sm sm:text-base">
+                      Reward
+                    </h1>
                     <h1 className="text-gray-400 text-xs sm:text-sm font-semibold">
                       2025-10-25
                     </h1>
@@ -323,7 +341,9 @@ const Sections = () => {
                 </div>
 
                 <div className="flex flex-col sm:text-right">
-                  <h1 className="text-white font-semibold text-sm sm:text-base">8.5 TON</h1>
+                  <h1 className="text-white font-semibold text-sm sm:text-base">
+                    8.5 TON
+                  </h1>
                   <h1 className="text-gray-400 font-semibold text-xs sm:text-sm">
                     completed
                   </h1>
@@ -336,7 +356,9 @@ const Sections = () => {
                     <FaCoins className="w-5 h-5 sm:w-6 sm:h-6 text-[#00D3F3]" />
                   </div>
                   <div className="flex flex-col">
-                    <h1 className="text-white font-semibold text-sm sm:text-base">Stake</h1>
+                    <h1 className="text-white font-semibold text-sm sm:text-base">
+                      Stake
+                    </h1>
                     <h1 className="text-gray-400 text-xs sm:text-sm font-semibold">
                       2025-10-15
                     </h1>
@@ -344,7 +366,9 @@ const Sections = () => {
                 </div>
 
                 <div className="flex flex-col sm:text-right">
-                  <h1 className="text-white font-semibold text-sm sm:text-base">+70.78 STAKED</h1>
+                  <h1 className="text-white font-semibold text-sm sm:text-base">
+                    +70.78 STAKED
+                  </h1>
                   <h1 className="text-gray-400 font-semibold text-xs sm:text-sm">
                     completed
                   </h1>
@@ -374,12 +398,16 @@ const Sections = () => {
 
               <div className="flex flex-row justify-center items-center gap-3 sm:gap-4 lg:gap-8">
                 <div className="flex-1 max-w-[150px] bg-[#060B21] rounded-xl border flex justify-center flex-col gap-2 py-3 text-center items-center border-gray-700">
-                  <h1 className="text-gray-400 text-xs sm:text-sm">Min Amount</h1>
+                  <h1 className="text-gray-400 text-xs sm:text-sm">
+                    Min Amount
+                  </h1>
                   <h1 className="text-white font-semibold text-sm">$20</h1>
                 </div>
 
                 <div className="flex-1 max-w-[150px] bg-[#060B21] rounded-xl border flex justify-center flex-col gap-2 py-3 text-center items-center border-gray-700">
-                  <h1 className="text-gray-400 text-xs sm:text-sm">Max Amount</h1>
+                  <h1 className="text-gray-400 text-xs sm:text-sm">
+                    Max Amount
+                  </h1>
                   <h1 className="text-white font-semibold text-sm">$10,000</h1>
                 </div>
               </div>
