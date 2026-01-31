@@ -18,8 +18,11 @@ const Navbar = () => {
   return (
     <div>
       <div className="hidden md:block bg-[#020618] w-full h-16 border-b fixed z-50 border-gray-400">
-        <div className="max-w-7xl mx-auto px-4 flex justify-between items-center h-full">
-          <div className="flex items-center gap-3">
+        <div className="max-w-7xl mx-auto px-4 flex justify-between items-center h-full cursor-pointer">
+          <div
+            className="flex items-center gap-3"
+            onClick={() => navigate("/")}
+          >
             <div className="w-10 h-10 flex justify-center items-center rounded-xl transition-transform duration-500 hover:rotate-360 bg-[#2AA1FF]">
               <MdAccountBalanceWallet className="text-white w-7 h-7" />
             </div>
@@ -47,10 +50,7 @@ const Navbar = () => {
             ))}
           </div>
 
-          <div
-            onClick={() => navigate("/app")}
-            className="flex bg-[#2AA1FF] gap-3 items-center rounded-xl h-10 px-4 hover:scale-105 transition cursor-pointer"
-          >
+          <div className="flex bg-[#2AA1FF] gap-3 items-center rounded-xl h-10 px-4 hover:scale-105 transition cursor-pointer">
             <PiWalletFill className="text-white w-6 h-6" />
             <h1 className="text-white font-semibold text-sm">Launch App</h1>
           </div>

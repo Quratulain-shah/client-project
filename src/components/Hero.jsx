@@ -1,10 +1,38 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { BsLightningCharge } from "react-icons/bs";
 import { FaArrowRight } from "react-icons/fa6";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { SlGraph } from "react-icons/sl";
-
+import { gsap } from "gsap/dist/gsap";
+import { TextPlugin } from "gsap/dist/TextPlugin";
+gsap.registerPlugin(TextPlugin);
 const Hero = () => {
+  const textRef = useRef(null);
+  const textRef1 = useRef(null);
+  useEffect(() => {
+    gsap.to(textRef.current, {
+      text: "Stake TON,",
+      duration: 2,
+      ease: "power2.out",
+    });
+  }, []);
+
+  useEffect(() => {
+    gsap.to(textRef1.current, {
+      text: "Earn Rewards",
+      duration: 3,
+      ease: "power3.out",
+    });
+  }, []);
+
+  useEffect(() => {
+    gsap.from(".para", {
+      x: "-180",
+      duration: 2,
+      ease: "power3.inOut",
+    });
+  });
+
   return (
     <div className="bg-[#092149] pt-20 md:pt-32 px-4 md:px-20">
       <div className="bg-[#092149] flex justify-center items-center gap-4 h-9 rounded-3xl w-60 border-2 border-[#10326E] mx-auto md:mx-0">
@@ -14,10 +42,13 @@ const Hero = () => {
 
       <div className="flex flex-col md:flex-row md:justify-between items-center md:items-start pb-4">
         <div className="flex flex-col gap-2 mt-10 text-center md:text-left">
-          <h1 className="text-4xl md:text-6xl text-white">Stake TON,</h1>
-          <h1 className="text-4xl md:text-6xl text-[#00D3F3]">Earn Rewards</h1>
+          <h1 ref={textRef} className="text-4xl md:text-6xl text-white"></h1>
+          <h1
+            ref={textRef1}
+            className="text-4xl md:text-6xl text-[#00D3F3]"
+          ></h1>
 
-          <h1 className="text-gray-400 font-semibold text-base md:text-lg mt-6">
+          <h1 className="text-gray-400 font-semibold text-base md:text-lg mt-6 para">
             The leading liquid staking protocol for TON. Stake your{" "}
             <br className="hidden md:block" />
             tokens, receive STAKED, and earn rewards while{" "}
@@ -68,7 +99,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden bg-[#092149]">
+        <div className="w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden bg-[#092149] shadow-lg shadow-cyan-200 border-2 hover:border-pink-300 border-cyan-500 transform rotate-0 hover:rotate-360 duration-1000">
           <video
             src="/vid.mp4"
             autoPlay
@@ -79,7 +110,6 @@ const Hero = () => {
             className="w-full h-full object-cover"
           />
         </div>
-
       </div>
     </div>
   );
