@@ -17,16 +17,16 @@ const Wallet = () => {
       },
     });
   });
-  useEffect(()=>{
-    gsap.from('.btn', {
+  useEffect(() => {
+    gsap.from(".btn", {
       opacity: 0,
       y: 60,
-      scrollTrigger:{
-        trigger: '.btn',
-        start: "to 80%"
-      }
-    })
-  })
+      scrollTrigger: {
+        trigger: ".btn",
+        start: "top 80%",
+      },
+    });
+  }, []);
   const [open, setOpen] = useState(null);
   const popupRef = useRef(null);
   const navigate = useNavigate();
@@ -49,12 +49,15 @@ const Wallet = () => {
   return (
     <div className="bg-gradient-to-b from-[#040f24] to-[#08244e] min-h-screen px-4">
       <div className="flex flex-col justify-center items-center gap-10 pt-10 md:pt-32">
-        <div
-          className="btn relative flex flex-row justify-center gap-3 items-center w-36 h-10 bg-gradient-to-r from-[#2883FF] to-[#00CEF4] rounded-md cursor-pointer"
-          onClick={() => setOpen(true)}
-        >
-          <LuWallet className="w-6 h-6 text-white" />
-          <h1 className="text-white text-sm font-semibold">Connect Wallet</h1>
+        <div className="relative">
+          <div
+            className="btn flex flex-row justify-center gap-3 items-center w-36 h-10 bg-gradient-to-r from-[#2883FF] to-[#00CEF4] rounded-md cursor-pointer"
+            onClick={() => setOpen(true)}
+          >
+            <LuWallet className="w-6 h-6 text-white" />
+            <h1 className="text-white text-sm font-semibold">Connect Wallet</h1>
+          </div>
+
           {open && (
             <div
               ref={popupRef}
@@ -105,7 +108,7 @@ const Wallet = () => {
                 </div>
 
                 <div
-                  className="bg-white hover:bg-[#0F172B] border hover:border-[#2AA1FF] flex justify-start p-3 sm:p-4 gap-2 rounded-xl w-full cursor-pointer transition-all "
+                  className="bg-white hover:bg-[#0F172B] border hover:border-[#2AA1FF] flex justify-start p-3 sm:p-4 gap-2 rounded-xl w-full cursor-pointer transition-all"
                   onClick={() => navigate("/Dashboard")}
                 >
                   <div className="w-8 h-8 bg-[#AD46FF] flex justify-center items-center rounded-md flex-shrink-0">
