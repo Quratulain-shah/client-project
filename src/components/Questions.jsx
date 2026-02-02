@@ -30,8 +30,7 @@ const Questions = () => {
     },
     {
       question: "Where are the fees?",
-      answer:
-        "We charge a 10% fee on staking rewards only.",
+      answer: "We charge a 10% fee on staking rewards only.",
     },
   ];
 
@@ -40,11 +39,9 @@ const Questions = () => {
   return (
     <div className="bg-[#091333] flex justify-center py-16 px-4 sm:px-6">
       <div className="w-full max-w-4xl flex flex-col gap-10">
-
         <div className="text-center">
           <h1 className="text-white font-semibold text-2xl sm:text-3xl md:text-5xl">
-            Frequently Asked{" "}
-            <span className="text-[#00D3F3]">Questions</span>
+            Frequently Asked <span className="text-[#00D3F3]">Questions</span>
           </h1>
 
           <p className="text-gray-400 font-medium text-sm sm:text-base md:text-xl mt-3">
@@ -82,7 +79,6 @@ const Questions = () => {
           ))}
         </div>
       </div>
-
     </div>
   );
 };

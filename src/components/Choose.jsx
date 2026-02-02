@@ -10,30 +10,31 @@ import { IoLockClosedOutline } from "react-icons/io5";
 
 const Choose = () => {
   return (
-    <div className="bg-gradient-to-b from-[#04122E] to-[#0a2752] min-h-screen pt-16 flex flex-col justify-center gap-10">
-      <div className="flex flex-col md:flex-row gap-6 px-4 sm:px-6 lg:px-8 justify-center items-center flex-wrap">
-        <div className="bg-[#050b27] w-full sm:w-72 h-48 gap-3 border border-gray-700 hover:border-[#00D3F3] transform hover:scale-105 duration-500 hover:bg-[#081035] rounded-2xl flex flex-col justify-start items-start p-4">
+    <div className="w-full">
+    <div className="bg-gradient-to-b  from-[#04122E] to-[#0a2752] min-h-screen pt-16 flex flex-col  items-center justify-center gap-10">
+      <div className="flex flex-col md:flex-row container justify-between items-center flex-wrap">
+        <div className="bg-[#050b27] w-full sm:w-60 h-48 gap-3 border border-gray-700 hover:border-[#00D3F3] transform hover:scale-105 duration-500 hover:bg-[#081035] rounded-2xl flex flex-col justify-start items-start p-4">
           <RiCoinsFill className="text-[#00D3F3] w-10 h-10 translate-x-0 hover:translate-x-10 rotate-0 hover:rotate-360 duration-200" />
           <h2 className="text-gray-400 text-sm">Total Value Locked</h2>
           <h1 className="text-white font-semibold text-3xl">$42.5M</h1>
           <h1 className="text-[#00D3F3]">+12.3%</h1>
         </div>
 
-        <div className="bg-[#050b27] w-full sm:w-72 h-48 gap-3 border border-gray-700 hover:border-[#00D3F3] transform hover:scale-105 duration-500 hover:bg-[#081035] rounded-2xl flex flex-col justify-start items-start p-4">
+        <div className="bg-[#050b27] w-full sm:w-60 h-48 gap-3 border border-gray-700 hover:border-[#00D3F3] transform hover:scale-105 duration-500 hover:bg-[#081035] rounded-2xl flex flex-col justify-start items-start p-4">
           <GoPeople className="text-[#00D3F3] w-10 h-10 translate-x-0 hover:translate-x-10 rotate-0 hover:rotate-360 duration-200" />
           <h2 className="text-gray-400 text-sm">Active Staker</h2>
           <h1 className="text-white font-semibold text-3xl">8,234</h1>
           <h1 className="text-[#00D3F3]">+8.1%</h1>
         </div>
 
-        <div className="bg-[#050b27] w-full sm:w-72 h-48 gap-3 border border-gray-700 hover:border-[#00D3F3] transform hover:scale-105 duration-500 hover:bg-[#081035] rounded-2xl flex flex-col justify-start items-start p-4">
+        <div className="bg-[#050b27] w-full sm:w-60 h-48 gap-3 border border-gray-700 hover:border-[#00D3F3] transform hover:scale-105 duration-500 hover:bg-[#081035] rounded-2xl flex flex-col justify-start items-start p-4">
           <MdOutlineAutoGraph className="text-[#00D3F3] w-10 h-10 translate-x-0 hover:translate-x-10 rotate-0 hover:rotate-360 duration-200" />
           <h2 className="text-gray-400 text-sm">Current APY</h2>
           <h1 className="text-white font-semibold text-3xl">5.2%</h1>
           <h1 className="text-[#00D3F3]">stable</h1>
         </div>
 
-        <div className="bg-[#050b27] w-full sm:w-72 h-48 gap-3 border border-gray-700 hover:border-[#00D3F3] transform hover:scale-105 duration-500 hover:bg-[#081035] rounded-2xl flex flex-col justify-start items-start p-4">
+        <div className="bg-[#050b27] w-full sm:w-60 h-48 gap-3 border border-gray-700 hover:border-[#00D3F3] transform hover:scale-105 duration-500 hover:bg-[#081035] rounded-2xl flex flex-col justify-start items-start p-4">
           <LuShield className="text-[#00D3F3] w-10 h-10 translate-x-0 hover:translate-x-10 rotate-0 hover:rotate-360 duration-200" />
           <h2 className="text-gray-400 text-sm">TON Staked</h2>
           <h1 className="text-white font-semibold text-3xl">2.1M</h1>
@@ -50,9 +51,9 @@ const Choose = () => {
           blockchain
         </h1>
       </div>
-      <div className="flex flex-col gap-10">
-        <div className="flex flex-col md:flex-row gap-6 lg:gap-10 px-4 sm:px-6 lg:px-10 justify-center items-center flex-wrap">
-          <div className="w-full sm:w-80 lg:w-96 h-auto min-h-56 flex flex-col gap-3 bg-[#0F1A3A] border border-gray-700 hover:border-[#00D3F3] p-6 transform hover:scale-105 duration-500 rounded-2xl justify-start items-start">
+      <div className="flex flex-col gap-10 w-full ">
+        <div className="flex flex-col md:flex-row justify-evenly items-center flex-wrap">
+          <div className="w-full sm:w-80 lg:w-75 h-auto min-h-56 flex flex-col gap-3 bg-[#0F1A3A] border border-gray-700 hover:border-[#00D3F3] p-6 transform hover:scale-105 duration-500 rounded-2xl justify-start items-start">
             <div
               className="w-12 h-12 flex justify-center items-center 
                 bg-[#0d1b55] rounded-xl border border-[#00D3F3]
@@ -71,7 +72,7 @@ const Choose = () => {
             </h1>
           </div>
 
-          <div className="w-full sm:w-80 lg:w-96 h-auto min-h-56 flex flex-col gap-3 bg-[#0F1A3A]  border border-gray-700 hover:border-[#00D3F3] p-6 transform hover:scale-105 duration-500 rounded-2xl justify-start items-start">
+          <div className="w-full sm:w-80 lg:w-75 h-auto min-h-56 flex flex-col gap-3 bg-[#0F1A3A]  border border-gray-700 hover:border-[#00D3F3] p-6 transform hover:scale-105 duration-500 rounded-2xl justify-start items-start">
             <div
               className="w-12 h-12 flex justify-center items-center 
                 bg-[#0d1b55] rounded-xl border border-[#00D3F3]
@@ -90,7 +91,7 @@ const Choose = () => {
             </h1>
           </div>
 
-          <div className="w-full sm:w-80 lg:w-96 h-auto min-h-56 flex flex-col gap-3 bg-[#0F1A3A]  border border-gray-700 hover:border-[#00D3F3] p-6 transform hover:scale-105 duration-500 rounded-2xl justify-start items-start">
+          <div className="w-full sm:w-80 lg:w-75 h-auto min-h-56 flex flex-col gap-3 bg-[#0F1A3A]  border border-gray-700 hover:border-[#00D3F3] p-6 transform hover:scale-105 duration-500 rounded-2xl justify-start items-start">
             <div
               className="w-12 h-12 flex justify-center items-center 
                 bg-[#0d1b55] rounded-xl border border-[#00D3F3]
@@ -110,8 +111,8 @@ const Choose = () => {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-6 lg:gap-10 px-4 sm:px-6 lg:px-10 mb-14 justify-center items-center flex-wrap">
-          <div className="w-full sm:w-80 lg:w-96 h-auto min-h-56 flex flex-col gap-3 bg-[#0F1A3A]  border border-gray-700 hover:border-[#00D3F3] p-6 transform hover:scale-105 duration-500 rounded-2xl justify-start items-start">
+        <div className="flex flex-col md:flex-row w-full mb-14 justify-evenly items-center flex-wrap">
+          <div className="w-full sm:w-80 lg:w-75 h-auto min-h-56 flex flex-col gap-3 bg-[#0F1A3A]  border border-gray-700 hover:border-[#00D3F3] p-6 transform hover:scale-105 duration-500 rounded-2xl justify-start items-start">
             <div
               className="w-12 h-12 flex justify-center items-center 
                 bg-[#0d1b55] rounded-xl border border-[#00D3F3]
@@ -130,7 +131,7 @@ const Choose = () => {
             </h1>
           </div>
 
-          <div className="w-full sm:w-80 lg:w-96 h-auto min-h-56 flex flex-col gap-3 bg-[#0F1A3A]  border border-gray-700 hover:border-[#00D3F3] p-6 transform hover:scale-105 duration-500 rounded-2xl justify-start items-start">
+          <div className="w-full sm:w-80 lg:w-75 h-auto min-h-56 flex flex-col gap-3 bg-[#0F1A3A]  border border-gray-700 hover:border-[#00D3F3] p-6 transform hover:scale-105 duration-500 rounded-2xl justify-start items-start">
             <div
               className="w-12 h-12 flex justify-center items-center 
                 bg-[#0d1b55] rounded-xl border border-[#00D3F3]
@@ -149,7 +150,7 @@ const Choose = () => {
             </h1>
           </div>
 
-          <div className="w-full sm:w-80 lg:w-96 h-auto min-h-56 flex flex-col gap-3 bg-[#0F1A3A]  border border-gray-700 hover:border-[#00D3F3] p-6 transform hover:scale-105 duration-500 rounded-2xl justify-start items-start">
+          <div className="w-full sm:w-80 lg:w-75 h-auto min-h-56 flex flex-col gap-3 bg-[#0F1A3A]  border border-gray-700 hover:border-[#00D3F3] p-6 transform hover:scale-105 duration-500 rounded-2xl justify-start items-start">
             <div
               className="w-12 h-12 flex justify-center items-center 
                 bg-[#0d1b55] rounded-xl border border-[#00D3F3]
@@ -167,6 +168,7 @@ const Choose = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
