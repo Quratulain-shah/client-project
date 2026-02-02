@@ -1,7 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosArrowDown } from "react-icons/io";
-
+import { gsap } from "gsap/dist/gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 const Questions = () => {
+  useEffect(() => {
+    gsap.from(".words", {
+      y: 60,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: ".words",
+        start: "top 80%",
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    gsap.from(".ques", {
+      y: 60,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: ".ques",
+        start: "top 80%",
+      },
+    });
+  }, []);
   const faqs = [
     {
       question: "What is liquid staking ?",
@@ -39,7 +64,7 @@ const Questions = () => {
   return (
     <div className="bg-[#091333] flex justify-center py-16 px-4 sm:px-6">
       <div className="w-full max-w-4xl flex flex-col gap-10">
-        <div className="text-center">
+        <div className="text-center words">
           <h1 className="text-white font-semibold text-2xl sm:text-3xl md:text-5xl">
             Frequently Asked <span className="text-[#00D3F3]">Questions</span>
           </h1>
@@ -49,7 +74,7 @@ const Questions = () => {
           </p>
         </div>
 
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 ques">
           {faqs.map((faq, index) => (
             <div
               key={index}

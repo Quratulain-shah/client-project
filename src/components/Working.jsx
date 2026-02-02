@@ -1,13 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { LuWallet } from "react-icons/lu";
 import { FaCoins } from "react-icons/fa6";
 import { MdArrowForward } from "react-icons/md";
 import { HiOutlineArrowTrendingUp } from "react-icons/hi2";
-
+import { gsap } from "gsap/dist/gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 const Working = () => {
+  useEffect(() => {
+    gsap.from(".text", {
+      y: 60,
+      duration: 1,
+      scrollTrigger: {
+        trigger: ".text",
+        start: "top 80%",
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    gsap.from(".blockes", {
+      y: 60,
+      opacity: 0,
+      duration: 1.5,
+      scrollTrigger: {
+        trigger: ".blockes",
+        start: "top 80%",
+      },
+    });
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col justify-center bg-[#111D42] px-4 pt-10 sm:pt-0 pb-5 sm:pb-0 md:px-0">
-      <div className="flex flex-col justify-center items-center text-center">
+      <div className="text flex flex-col justify-center items-center text-center">
         <h1 className="text-white text-3xl md:text-5xl">
           How it <span className="text-[#00D3F3]">Work</span>
         </h1>
@@ -16,7 +41,7 @@ const Working = () => {
         </h1>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-center gap-6 px-2 md:px-10 mt-14">
+      <div className="blockes flex flex-col md:flex-row justify-center gap-6 px-2 md:px-10 mt-14">
         <div className="flex flex-row gap-0 justify-center items-center">
           <div className="w-full md:w-72 h-56 p-6 flex flex-col gap-3 bg-[#0F1835] border border-gray-700 rounded-2xl hover:border-[#00D3F3] transform hover:scale-105 duration-500">
             <div className="w-12 h-12 flex justify-center items-center bg-[#00D3F3] rounded-xl rotate-0 transform hover:rotate-y-90 duration-500">

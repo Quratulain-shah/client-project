@@ -57,7 +57,7 @@ const Hero = () => {
               maintaining full liquidity.
             </h1>
 
-            <div className="flex flex-col sm:flex-row gap-6 mt-6 justify-center md:justify-start">
+            <div className="flex flex-row gap-6 mt-6 justify-center md:justify-start">
               <div className="cursor-pointer bg-gradient-to-r flex justify-center gap-4 items-center transform hover:scale-105 from-[#2983FF] to-[#00CEF3] h-9 w-36 rounded-xl">
                 <h1 className="text-sm text-white font-semibold">
                   Start Staking
@@ -71,7 +71,7 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row w-full sm:w-[19rem] justify-between mt-10 gap-6 sm:gap-0 mx-auto md:mx-0">
+            <div className="flex flex-row w-full sm:w-[19rem] justify-center sm:justify-between mt-10 gap-16 sm:gap-0 mx-auto md:mx-0">
               <div className="flex flex-row gap-3 transform hover:scale-104 justify-center md:justify-start">
                 <div className="w-10 h-10 rounded-xl bg-blue-500 flex justify-center items-center">
                   <SlGraph className="w-8 h-8 text-[#00D3F3]" />

@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BsCheckCircle } from "react-icons/bs";
-
+import { gsap } from "gsap/dist/gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 const Enterprise = () => {
+  useEffect(() => {
+    gsap.from(".head", {
+      opacity: 0,
+      y: 60,
+      duration: 1,
+      stagger: 0.1,
+      scrollTrigger: {
+        trigger: ".head",
+        start: "top 90%",
+      },
+    });
+  }, []);
+  useEffect(() => {
+    gsap.from(".script", {
+      opacity: 0,
+      x: -70,
+      duration: 1,
+      stagger: 0.1,
+      scrollTrigger: {
+        trigger: ".script",
+        start: "top 90%",
+      },
+    });
+  }, []);
   const data = [
     { text: "Customizable staking solutions for institutional portfolios" },
     { text: "White-label integration options for exchanges and custodians" },
@@ -16,7 +42,7 @@ const Enterprise = () => {
   return (
     <div className="bg-[#13214F] flex justify-center pt-24 px-4 pb-10">
       <div className="flex flex-col w-full max-w-4xl gap-10">
-        <div className="flex flex-col text-center gap-2">
+        <div className="flex flex-col text-center gap-2 head">
           <h1 className="text-white text-3xl md:text-5xl">
             Enterprise <span className="text-[#37B3FE]"> Features </span>
           </h1>
@@ -32,7 +58,7 @@ const Enterprise = () => {
               className="flex gap-4 text-sm font-semibold text-gray-400 "
             >
               <BsCheckCircle className="w-4 h-4 text-[#37B3FE] mt-1 shrink-0 transition-transform group-hover:scale-110" />
-              <p>{item.text}</p>
+              <p className="script">{item.text}</p>
             </div>
           ))}
         </div>

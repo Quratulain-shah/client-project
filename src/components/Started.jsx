@@ -1,12 +1,26 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { LuBuilding2 } from "react-icons/lu";
 import { PiHeadphonesBold } from "react-icons/pi";
-
+import { gsap } from "gsap/dist/gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 const Started = () => {
+   useEffect(() => {
+      gsap.from(".started", {
+        opacity: 0,
+        y: 60,
+        duration: 1,
+        
+        scrollTrigger: {
+          trigger: ".started",
+          start: "top 90%",
+        },
+      });
+    }, []);
   return (
     <div className="bg-[#060F2A] flex justify-center items-center pb-10 pt-20">
       <div className="bg-[#09193B] w-full md:w-3xl rounded-2xl pb-10 pt-10">
-        <div className="flex flex-col items-center justify-center gap-6 text-center">
+        <div className="flex flex-col items-center justify-center gap-6 text-center started">
           <LuBuilding2 className="w-14 h-12 text-[#37B3FE]" />
           <h1 className="text-4xl text-white">Ready to Get Started?</h1>
           <p className="text-gray-400 text-lg font-semibold">

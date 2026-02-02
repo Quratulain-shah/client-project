@@ -1,12 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { LuBuilding2 } from "react-icons/lu";
 import { IoIosSearch } from "react-icons/io";
 import { CiCalendarDate } from "react-icons/ci";
 import { IoMdTime } from "react-icons/io";
-
+import { gsap } from "gsap/dist/gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 const Newss = () => {
   const [search, setSearch] = useState("");
+  useEffect(() => {
+    gsap.from(".flow", {
+      opacity: 0,
+      y: 60,
+      duration: 0.6,
+      scrollTrigger: {
+        trigger: ".flow",
+        start: "top 90%",
+      },
+    });
+  }, []);
 
+  useEffect(() => {
+    gsap.from(".blokes", {
+      opacity: 0,
+      y: 60,
+      duration: 0.8,
+      stagger: 0.1,
+      scrollTrigger: {
+        trigger: ".blokes",
+        start: "top 90%",
+      },
+    });
+  }, []);
   const data = [
     {
       img: "/coin.PNG",
@@ -76,12 +101,12 @@ const Newss = () => {
   return (
     <div className="flex justify-center bg-gradient-to-b pt-16 md:pt-24 lg:pt-30 from-[#040b24] to-[#0F1B42] px-4">
       <div className="flex flex-col justify-center items-center gap-6 w-full max-w-7xl">
-        <div className="flex justify-center items-center gap-2 flex-row w-full sm:w-40 h-9 bg-[#071535] rounded-3xl border border-[#3da9fc]">
+        <div className="flex justify-center items-center gap-2 flex-row w-full sm:w-40 h-9 bg-[#071535] rounded-3xl border border-[#3da9fc] flow">
           <LuBuilding2 className="text-[#219bf8] w-4 h-4" />
           <h1 className="text-white text-sm text-center">Latest Updates</h1>
         </div>
 
-        <div className="flex flex-col gap-4 text-center px-2">
+        <div className="flex flex-col gap-4 text-center px-2 flow">
           <h1 className="text-3xl sm:text-4xl md:text-5xl text-[#219bf8]">
             News & Updates
           </h1>
@@ -90,7 +115,7 @@ const Newss = () => {
           </h1>
         </div>
 
-        <div className="flex flex-row w-full max-w-4xl h-12 md:h-14 border hover:border-[#219bf8] gap-4 border-gray-700 justify-start items-center p-3 rounded-xl">
+        <div className="flex flex-row w-full max-w-4xl h-12 md:h-14 border hover:border-[#219bf8] gap-4 border-gray-700 justify-start items-center p-3 rounded-xl flow">
           <IoIosSearch className="w-5 h-5 md:w-6 md:h-6 text-gray-300" />
           <input
             type="text"
@@ -101,7 +126,7 @@ const Newss = () => {
           />
         </div>
 
-        <div className="flex flex-wrap gap-6 py-6 md:p-10 justify-center md:justify-start w-full">
+        <div className="flex flex-wrap gap-6 py-6 md:p-10 justify-center md:justify-start w-full blokes">
           {filteredData.map((item, index) => (
             <div
               className="w-full sm:w-[48%] lg:w-96 group transform bg-[#0C1531] rounded-xl transition-transform hover:-translate-y-2 duration-300 border border-gray-600 hover:border-[#219bf8]"

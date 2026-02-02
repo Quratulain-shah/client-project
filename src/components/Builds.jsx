@@ -1,12 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MdOutlineShield } from "react-icons/md";
 import { BsGraphUpArrow } from "react-icons/bs";
 import { IoLockClosedOutline } from "react-icons/io5";
 import { GoPeople } from "react-icons/go";
 import { LuGlobe } from "react-icons/lu";
 import { BsLightningCharge } from "react-icons/bs";
-
+import { gsap } from "gsap/dist/gsap";
+import { ScrollTrigger } from "gsap/all";
+gsap.registerPlugin(ScrollTrigger);
 const Builds = () => {
+  useEffect(() => {
+    gsap.from(".line", {
+      opacity: 0,
+      y: 70,
+      duration: 1,
+      stagger: 0.4,
+      scrollTrigger: {
+        trigger: ".line",
+        start: "top 90%",
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    gsap.from(".boxx", {
+      opacity: 0,
+      y: 70,
+      duration: 1,
+      delay: 0.4,
+      scrollTrigger: {
+        trigger: ".boxx",
+        start: "top 80%",
+      },
+    });
+  }, []);
+
   const data = [
     {
       icon: <MdOutlineShield className="text-white w-5 h-5" />,
@@ -39,10 +67,11 @@ const Builds = () => {
       para: "Access deep liquidity pools for STAKED tokens, enabling flexible treasury management at scale.",
     },
   ];
+
   return (
     <div className="min-h-screen pt-12 md:pt-28 flex justify-center bg-[#0A1536]">
       <div className="flex flex-col">
-        <div className="flex flex-col text-center gap-2">
+        <div className="flex flex-col text-center gap-2 line">
           <h1 className="text-white text-5xl">
             Built for <span className="text-[#37B3FE]"> Institutions </span>
           </h1>
@@ -52,7 +81,7 @@ const Builds = () => {
           </h1>
         </div>
 
-        <div className="flex justify-center flex-wrap gap-8 pt-10">
+        <div className="flex justify-center flex-wrap gap-8 pt-10 boxx">
           {data.map((item, index) => (
             <div
               key={index}

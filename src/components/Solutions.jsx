@@ -1,10 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { HiBuildingOffice } from "react-icons/hi2";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { HiOutlineArrowTrendingUp } from "react-icons/hi2";
 import { GoPeople } from "react-icons/go";
-
+import { gsap } from "gsap/dist/gsap";
+import { ScrollTrigger } from "gsap/all";
+gsap.registerPlugin(ScrollTrigger);
 const Solutions = () => {
+  useEffect(() => {
+    gsap.from(".liness", {
+      opacity: 0,
+      y: 70,
+      duration: 1,
+      stagger: 0.4,
+      scrollTrigger: {
+        trigger: ".liness",
+        start: "top 90%",
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    gsap.from(".blockk", {
+      opacity: 0,
+      y: 70,
+      duration: 1,
+      delay: 0.4,
+      scrollTrigger: {
+        trigger: ".blockk",
+        start: "top 80%",
+      },
+    });
+  }, []);
+
   const data = [
     {
       icon: <HiBuildingOffice className="w-6 h-6 text-white" />,
@@ -36,7 +64,7 @@ const Solutions = () => {
   ];
   return (
     <div className="pt-24 bg-[#0C1639] flex flex-col justify-center pb-10">
-      <div className="flex flex-col text-center gap-2">
+      <div className="flex flex-col text-center gap-2 liness">
         <h1 className="text-white text-5xl">
           Tailored <span className="text-[#37B3FE]"> Solutions </span>
         </h1>
@@ -45,7 +73,7 @@ const Solutions = () => {
         </h1>
       </div>
 
-      <div className="flex justify-center flex-wrap gap-8 mt-10 ">
+      <div className="flex justify-center flex-wrap gap-8 mt-10 blockk">
         {data.map((item, index) => (
           <div
             className="w-86 group bg-[#0E1734] p-6 rounded-xl flex flex-col gap-3 border border-gray-700 transition transform hover:border-[#37B3FE]"
