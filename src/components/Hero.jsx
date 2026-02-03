@@ -58,7 +58,7 @@ const Hero = () => {
             </h1>
 
             <div className="flex flex-row gap-6 mt-6 justify-center md:justify-start">
-              <div className="cursor-pointer bg-gradient-to-r flex justify-center gap-4 items-center transform hover:scale-105 from-[#2983FF] to-[#00CEF3] h-9 w-36 rounded-xl">
+              <div className="cursor-pointer  flex justify-center gap-4 items-center transform hover:scale-105 bg-gradient-to-r from-[#2983FF] to-[#00CEF3] h-9 w-36 rounded-xl">
                 <h1 className="text-sm text-white font-semibold">
                   Start Staking
                 </h1>
@@ -100,7 +100,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="w-72 h-72 md:w-96 md:h-96 rounded-full  shadow-2xl shadow-[-5px_-5px_15px_#123B5A] overflow-hidden bg-[#092149] ">
+          <div className="w-72 h-72 md:w-96 md:h-96 rounded-full  shadow-2xl shadow-[-5px_-5px_15px_#123B5A] overflow-hidden bg-[#092149] mx-0 sm:mx-24">
             <video
               src="/vid.mp4"
               autoPlay

@@ -50,7 +50,7 @@ const Navbar = () => {
             ))}
           </div>
 
-          <div className="flex bg-[#2AA1FF] gap-3 items-center rounded-xl h-10 px-4 hover:scale-105 transition cursor-pointer">
+          <div className="flex bg-gradient-to-r from-[#2983FF] to-[#00CEF3] gap-3 items-center rounded-xl h-10 px-4 hover:scale-105 transition cursor-pointer">
             <PiWalletFill className="text-white w-6 h-6" />
             <h1 className="text-white font-semibold text-sm">Launch App</h1>
           </div>

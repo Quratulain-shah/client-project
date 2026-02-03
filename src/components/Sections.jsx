@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { LuWallet } from "react-icons/lu";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { useNavigate } from "react-router";
@@ -13,6 +13,18 @@ import { BiWallet } from "react-icons/bi";
 
 const Sections = () => {
   const navigate = useNavigate();
+  const [staked, setStaked] = useState(true);
+  const [amount, setAmount] = useState(0.00);
+  const [days, setDays] = useState(1);
+  const [stakeAmount, seStakeAmount] = useState(0);
+  const RATE = 0.9597 ;
+  const balance = ( amount * RATE).toFixed(4);
+  const rewards = parseFloat((days * 0.143).toFixed(2));
+  const total = rewards + 1.0001;
+  const result = stakeAmount ? (stakeAmount * total).toFixed(2) : "0.00";
+
+  
+
   const payments = ["Visa", "Mastercard", "Apple Pay"];
   return (
     <div className="bg-gradient-to-b from-[#040f24] to-[#08244e] pb-10 pt-20 sm:pt-24 lg:pt-28">
@@ -35,7 +47,7 @@ const Sections = () => {
             </div>
 
             <div
-              className="relative flex flex-row justify-center gap-3 items-center w-auto px-3 h-9 bg-[#2883FF] hover:bg-[#081026] border hover:border-gray-400 rounded-md cursor-pointer"
+              className="relative flex flex-row justify-center gap-3 items-center w-auto px-3 h-9 bg-gradient-to-r from-[#2983FF] to-[#00CEF3] hover:bg-[#081026] border hover:border-gray-400 rounded-md cursor-pointer"
               onClick={() => navigate("/AppPage")}
             >
               <IoExitOutline className="w-6 h-6 text-white" />
@@ -47,13 +59,35 @@ const Sections = () => {
         <div className="flex flex-col xl:flex-row gap-6">
           <div className="flex flex-col w-full xl:w-auto xl:flex-1 p-3 sm:p-4 lg:p-6 bg-[#081026] border border-gray-600 rounded-2xl">
             <div className="w-full h-8 flex flex-row justify-center items-center gap-0.5 border border-gray-600 rounded-xl">
-              <div className="w-1/2 bg-[#132957] flex text-center justify-center border border-[#2883FF] h-7.5 rounded-xl cursor-pointer">
-                <h1 className="text-white">Stake</h1>
-              </div>
+              <button
+                className={`w-1/2   flex text-center text-white justify-center border  h-7.5 rounded-xl cursor-pointer
+                 ${
+                   staked
+                     ? "bg-gradient-to-r from-[#2983FF] to-[#00CEF3] border border-[#2883FF]"
+                     : "bg-[#081026] border border-[#081026]"
+                 }
+                `}
+                onClick={() => {
+                  if (!staked) setStaked(true);
+                }}
+              >
+                Stake
+              </button>
 
-              <div className="w-1/2 flex text-center justify-center border h-7.5 rounded-xl cursor-pointer">
-                <h1 className="text-white">Unstake</h1>
-              </div>
+              <button
+                className={`w-1/2 flex text-center border justify-center text-white  h-7.5 rounded-xl cursor-pointer
+               ${
+                 !staked
+                   ? "bg-gradient-to-r from-[#2983FF] to-[#00CEF3] border border-[#2883FF]"
+                   : "bg-[#081026] border border-[#081026]"
+               }
+              `}
+                onClick={() => {
+                  if (staked) setStaked(false);
+                }}
+              >
+                UnStake
+              </button>
             </div>
 
             <div className="w-full p-3 flex flex-col sm:flex-row justify-between gap-2 sm:gap-0">
@@ -67,14 +101,16 @@ const Sections = () => {
               <input
                 type="number"
                 placeholder="0.00"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
                 className="text-gray-400 h-7 appearance-none bg-transparent border-none outline-none w-full"
               />
               <div className="flex flex-row gap-3 flex-shrink-0">
-                <h1 className="text-[#00D3F3] font-semibold text-lg sm:text-xl hover:bg-blue-100 hover:border rounded-md cursor-pointer px-1">
+                <h1 className="text-[#00D3F3] font-semibold text-lg sm:text-xl hover:bg-gradient-to-r from-[#2983FF] to-[#00CEF3] hover:text-white hover:border rounded-md cursor-pointer px-1">
                   MAX
                 </h1>
                 <h1 className="text-gray-400 font-semibold text-lg sm:text-xl">
-                  TON
+                  {staked ? "TON" : "STAKED"}
                 </h1>
               </div>
             </div>
@@ -90,9 +126,14 @@ const Sections = () => {
               </div>
 
               <div className="flex flex-col gap-2 text-left sm:text-right">
-                <h1 className="text-white text-base sm:text-lg font-semibold">
-                  0.0000 STAKED
-                </h1>
+                <div className="flex flex-row gap-4">
+                  <h1 className="text-white text-base sm:text-lg font-semibold">
+                    {balance}
+                  </h1>
+                  <h1 className="text-white text-base sm:text-lg font-semibold">
+                    {staked ? "STAKED" : "TON"}
+                  </h1>
+                </div>
                 <h1 className="text-gray-400 text-sm font-semibold">
                   1 STAKED = 1.0420 TON
                 </h1>
@@ -107,9 +148,9 @@ const Sections = () => {
               </p>
             </div>
 
-            <div className="w-full flex flex-row gap-4 bg-gradient-to-r from-[#16519B] to-[#067295] justify-center items-center text-center h-12 sm:h-14 mt-6 sm:mt-8 rounded-xl cursor-pointer">
-              <h1 className="text-gray-300 text-sm sm:text-base">Stake TON</h1>
-              <FaArrowRightLong className="text-gray-400 w-4 h-4" />
+            <div className="w-full flex flex-row gap-4 bg-gradient-to-r from-[#2983FF] to-[#00CEF3] justify-center items-center text-center h-12 sm:h-14 mt-6 sm:mt-8 rounded-xl cursor-pointer">
+              <h1 className="text-white text-sm font-semibold sm:text-base">Stake TON</h1>
+              <FaArrowRightLong className="text-white w-4 h-4 font-semibold" />
             </div>
           </div>
 
@@ -134,7 +175,9 @@ const Sections = () => {
               <div className="w-full p-3 sm:p-4  rounded-xl border border-gray-700 hover:border-2 hover:border-gray-400">
                 <input
                   type="number"
-                  placeholder="1000"
+                  value={stakeAmount}
+                   onChange={(e) => seStakeAmount(e.target.value)}
+                  placeholder="0.00"
                   className="text-white appearance-none border-none w-full focus:ring-0 outline-none bg-transparent"
                 />
               </div>
@@ -142,12 +185,18 @@ const Sections = () => {
 
             <div className="w-full p-3 justify-between flex flex-row">
               <h1 className="text-gray-400 text-sm font-semibold">Duration</h1>
-              <h1 className="text-gray-400 text-sm font-semibold">days</h1>
+              <h1 className="text-gray-400 text-sm font-semibold">{days}days</h1>
             </div>
 
             <div className="w-full p-3 bg-[#030213] h-4 rounded-full flex justify-center items-center">
               <input
                 type="range"
+                min={1}
+                max={365}
+                value={days}
+                
+                onChange={(e) => setDays(e.target.value)}
+
                 className="w-full h-3 rounded-full cursor-pointer text-white"
               />
             </div>
@@ -172,7 +221,7 @@ const Sections = () => {
                   Estimated Rewards
                 </h1>
                 <h1 className="text-sm font-semibold text-[#00D3F3]">
-                  +0.00 TON
+                  +{rewards} TON
                 </h1>
               </div>
               <div className="w-full bg-gray-700 h-0.5"></div>
@@ -182,7 +231,7 @@ const Sections = () => {
                   Total Value
                 </h1>
                 <h1 className="text-lg sm:text-xl font-semibold text-white">
-                  0.00 TON
+                  {result} TON
                 </h1>
               </div>
             </div>

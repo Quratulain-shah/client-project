@@ -12,7 +12,7 @@ const Footer = () => {
       opacity: 0,
       x: -60,
       duration: 1,
-      stagger: 0.15,
+      stagger: 0.2,
       scrollTrigger: {
         trigger: ".footer",
         start: "top 90%",
