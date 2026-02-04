@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdAccountBalanceWallet } from "react-icons/md";
 import { PiWalletFill } from "react-icons/pi";
 import { useNavigate } from "react-router";
+import { useTonConnectUI } from "@tonconnect/ui-react";
+import { TonClient } from "ton"; // instead of "ton-core"
+
 const Navbar = () => {
   const [activeNav, setActiveNav] = useState("Home");
   const navigate = useNavigate();
-
+  const [tonConnectUI] = useTonConnectUI();
+  const [balance, setBalance] = useState(null);
+  const [showDisconnect, setShowDisconnect] = useState(false);
   const handleNavClick = (item) => {
     setActiveNav(item);
 
@@ -14,6 +19,31 @@ const Navbar = () => {
     else if (item === "Institutional") navigate("/Institutional");
     else if (item === "News") navigate("/News");
   };
+
+  const client = new TonClient({
+    endpoint: "https://toncenter.com/api/v2/jsonRPC",
+  });
+
+  useEffect(() => {
+    if (!tonConnectUI.wallet) {
+      setBalance(null);
+      return;
+    }
+
+    const address = tonConnectUI.wallet.account.address;
+
+    const fetchBalance = async () => {
+      try {
+        const info = await client.getAccount(address);
+        setBalance((Number(info.balance) / 1e9).toFixed(2));
+      } catch (e) {
+        console.error(e);
+        setBalance("Error");
+      }
+    };
+
+    fetchBalance();
+  }, [tonConnectUI.wallet]);
 
   return (
     <div>
@@ -29,6 +59,7 @@ const Navbar = () => {
             <h1 className="text-white font-semibold text-xl">Stakee</h1>
           </div>
 
+          {/* Navigation Links */}
           <div className="flex gap-10">
             {["Home", "App", "Institutional", "News"].map((item) => (
               <div key={item} className="relative">
@@ -42,7 +73,6 @@ const Navbar = () => {
                 >
                   {item}
                 </h1>
-
                 {activeNav === item && (
                   <div className="absolute -bottom-[20px] left-0 right-0 h-0.5 bg-[#2AA1FF]" />
                 )}
@@ -52,7 +82,52 @@ const Navbar = () => {
 
           <div className="flex bg-gradient-to-r from-[#2983FF] to-[#00CEF3] gap-3 items-center rounded-xl h-10 px-4 hover:scale-105 transition cursor-pointer">
             <PiWalletFill className="text-white w-6 h-6" />
-            <h1 className="text-white font-semibold text-sm">Launch App</h1>
+            {!tonConnectUI.wallet ? (
+              <button
+                onClick={() => tonConnectUI.openModal()}
+                className="text-white font-semibold text-sm"
+              >
+                Connect Wallet
+              </button>
+            ) : (
+              <div className="relative">
+                <button
+                  onClick={() => setShowDisconnect(!showDisconnect)}
+                  className="text-white font-semibold text-sm font-mono"
+                >
+                  {tonConnectUI.wallet?.account?.address
+                    ? `${tonConnectUI.wallet.account.address.slice(0, 6)}...${tonConnectUI.wallet.account.address.slice(-4)}`
+                    : "Connected"}
+                </button>
+
+                {showDisconnect && (
+                  <>
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setShowDisconnect(false)}
+                    />
+                    <div className="absolute top-full right-0 mt-2 bg-[#0a1628] border border-gray-600 rounded-lg p-4 min-w-[220px] shadow-xl z-50">
+                      <div className="text-gray-400 text-xs mb-1">
+                        Wallet Address
+                      </div>
+                      <div className="text-white text-sm mb-4 font-mono break-all">
+                        {tonConnectUI.wallet?.account?.address || "N/A"}
+                      </div>
+
+                      <button
+                        onClick={() => {
+                          tonConnectUI.disconnect();
+                          setShowDisconnect(false);
+                        }}
+                        className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold text-sm px-4 py-2 rounded transition"
+                      >
+                        Disconnect
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -67,11 +142,57 @@ const Navbar = () => {
           </div>
 
           <div
-            onClick={() => navigate("/app")}
+            onClick={() => navigate("/AppPage")}
             className="flex bg-[#2AA1FF] gap-2 items-center rounded-xl h-10 px-3 cursor-pointer active:scale-95 transition"
           >
             <PiWalletFill className="text-white w-5 h-5" />
-            <h1 className="text-white font-semibold text-xs">Launch App</h1>
+
+            {!tonConnectUI.wallet ? (
+              <button
+                onClick={() => tonConnectUI.openModal()}
+                className="text-white font-semibold text-sm"
+              >
+                Connect Wallet
+              </button>
+            ) : (
+              <div className="relative">
+                <button
+                  onClick={() => setShowDisconnect(!showDisconnect)}
+                  className="text-white font-semibold text-sm font-mono"
+                >
+                  {tonConnectUI.wallet?.account?.address
+                    ? `${tonConnectUI.wallet.account.address.slice(0, 6)}...${tonConnectUI.wallet.account.address.slice(-4)}`
+                    : "Connected"}
+                </button>
+
+                {showDisconnect && (
+                  <>
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setShowDisconnect(false)}
+                    />
+                    <div className="absolute top-full right-0 mt-2 bg-[#0a1628] border border-gray-600 rounded-lg p-4 min-w-[220px] shadow-xl z-50">
+                      <div className="text-gray-400 text-xs mb-1">
+                        Wallet Address
+                      </div>
+                      <div className="text-white text-sm mb-4 font-mono break-all">
+                        {tonConnectUI.wallet?.account?.address || "N/A"}
+                      </div>
+
+                      <button
+                        onClick={() => {
+                          tonConnectUI.disconnect();
+                          setShowDisconnect(false);
+                        }}
+                        className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold text-sm px-4 py-2 rounded transition"
+                      >
+                        Disconnect
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -91,7 +212,6 @@ const Navbar = () => {
                     : "opacity-0 group-hover:opacity-100"
                 }`}
               />
-
               <h1
                 className={`font-semibold text-xs transition-colors text-center ${
                   activeNav === item
@@ -101,7 +221,6 @@ const Navbar = () => {
               >
                 {item}
               </h1>
-
               {activeNav === item && (
                 <div className="absolute -top-[17px] left-0 right-0 h-0.5 bg-[#2AA1FF]" />
               )}
