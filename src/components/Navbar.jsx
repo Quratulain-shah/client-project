@@ -15,12 +15,14 @@ const Navbar = () => {
   const [balance, setBalance] = useState(null);
   const [showDisconnect, setShowDisconnect] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [animationsStarted, setAnimationsStarted] = useState(false);
 
   // Refs for animations
   const navRef = useRef(null);
   const logoRef = useRef(null);
   const navItemsRef = useRef([]);
   const walletBtnRef = useRef(null);
+  const mobileNavRef = useRef(null);
 
   const client = new TonClient({
     endpoint: "https://toncenter.com/api/v2/jsonRPC",
@@ -52,40 +54,42 @@ const Navbar = () => {
 
   // ============ GSAP ANIMATIONS ============
   useEffect(() => {
-    // Navbar entrance
-    gsap.from(navRef.current, {
-      y: -100,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power3.out",
-    });
+    // Pehle navbar ko visible rakho
+    gsap.set(navRef.current, { y: 0, opacity: 1 });
+    gsap.set(logoRef.current, { scale: 1, opacity: 1 });
+    gsap.set(navItemsRef.current, { y: 0, opacity: 1 });
+    gsap.set(walletBtnRef.current, { scale: 1, opacity: 1 });
+    gsap.set(mobileNavRef.current, { y: 0, opacity: 1 });
 
-    // Logo animation
-    gsap.from(logoRef.current, {
-      scale: 0.8,
-      opacity: 0,
-      duration: 0.6,
-      delay: 0.2,
-      ease: "back.out(1.2)",
-    });
+    // Thoda delay do taake pehle render ho jaye
+    requestAnimationFrame(() => {
+      setAnimationsStarted(true);
 
-    // Nav items stagger
-    gsap.from(navItemsRef.current, {
-      y: -20,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.1,
-      delay: 0.4,
-      ease: "power2.out",
-    });
+      // Ab animations chalao but starting point se nahi, current position se
+      const tl = gsap.timeline();
 
-    // Wallet button animation
-    gsap.from(walletBtnRef.current, {
-      scale: 0.9,
-      opacity: 0,
-      duration: 0.5,
-      delay: 0.6,
-      ease: "elastic.out(1, 0.5)",
+      // Logo subtle animation
+      tl.fromTo(
+        logoRef.current,
+        { scale: 0.9, opacity: 0.9 },
+        { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.2)" }
+      );
+
+      // Nav items subtle stagger
+      tl.fromTo(
+        navItemsRef.current,
+        { y: -5, opacity: 0.9 },
+        { y: 0, opacity: 1, duration: 0.4, stagger: 0.05, ease: "power2.out" },
+        "-=0.3"
+      );
+
+      // Wallet button subtle animation
+      tl.fromTo(
+        walletBtnRef.current,
+        { scale: 0.95, opacity: 0.9 },
+        { scale: 1, opacity: 1, duration: 0.4, ease: "elastic.out(1, 0.5)" },
+        "-=0.2"
+      );
     });
   }, []);
 
@@ -145,7 +149,7 @@ const Navbar = () => {
             </span>
           </div>
 
-          {/* Navigation Links - Original Structure */}
+          {/* Navigation Links */}
           <div className="flex gap-8">
             {navItems.map((item, index) => (
               <div
@@ -166,16 +170,14 @@ const Navbar = () => {
                 {activeNav === item && (
                   <div className="absolute -bottom-[22px] left-0 right-0 h-0.5 bg-gradient-to-r from-[#2AA1FF] to-[#00CEF3] rounded-full animate-slideIn" />
                 )}
-                {/* Hover indicator */}
                 <div className="absolute -bottom-[22px] left-0 right-0 h-0.5 bg-gradient-to-r from-[#2AA1FF]/50 to-[#00CEF3]/50 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
               </div>
             ))}
           </div>
 
-          {/* Wallet Section - Original Structure with Enhanced Styling */}
+          {/* Wallet Section */}
           <div ref={walletBtnRef} className="relative">
             <div className="flex bg-gradient-to-r from-[#2AA1FF] to-[#00CEF3] gap-3 items-center rounded-xl h-11 px-5 hover:scale-105 transition-all duration-300 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 overflow-hidden group">
-              {/* Animated shine effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
 
               <PiWalletFill className="text-white w-5 h-5" />
@@ -210,7 +212,6 @@ const Navbar = () => {
                         onClick={() => setShowDisconnect(false)}
                       />
                       <div className="absolute top-full right-0 mt-2 bg-[#0A0F1C] border border-gray-700/50 rounded-xl p-4 min-w-[260px] shadow-2xl shadow-black/50 z-50 backdrop-blur-xl animate-slideDown">
-                        {/* Wallet Address Header */}
                         <div className="flex items-center justify-between mb-3">
                           <span className="text-gray-400 text-xs font-medium">
                             Wallet Address
@@ -218,7 +219,6 @@ const Navbar = () => {
                           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                         </div>
 
-                        {/* Address with Copy */}
                         <div className="flex items-center justify-between bg-white/5 rounded-lg p-3 mb-4">
                           <div className="text-white text-sm font-mono break-all">
                             {tonConnectUI.wallet?.account?.address || "N/A"}
@@ -235,7 +235,6 @@ const Navbar = () => {
                           </button>
                         </div>
 
-                        {/* Balance Display */}
                         {balance && (
                           <div className="flex items-center justify-between mb-4 bg-gradient-to-r from-[#2AA1FF]/10 to-[#00CEF3]/10 rounded-lg p-3">
                             <span className="text-gray-400 text-sm">
@@ -250,7 +249,6 @@ const Navbar = () => {
                           </div>
                         )}
 
-                        {/* Disconnect Button */}
                         <button
                           onClick={() => {
                             tonConnectUI.disconnect();
@@ -274,7 +272,6 @@ const Navbar = () => {
       {/* ============ MOBILE NAVBAR ============ */}
       <div className="md:hidden bg-[#020618]/95 backdrop-blur-md w-full h-16 border-b fixed z-50 border-gray-800/50">
         <div className="px-4 flex justify-between items-center h-full">
-          {/* Mobile Logo */}
           <div
             className="flex items-center gap-2 cursor-pointer group"
             onClick={() => handleNavClick("Home")}
@@ -286,7 +283,6 @@ const Navbar = () => {
             <h1 className="text-white font-bold text-xl">Stakee</h1>
           </div>
 
-          {/* Mobile Wallet Button */}
           <div
             onClick={() =>
               !tonConnectUI.wallet
@@ -347,7 +343,10 @@ const Navbar = () => {
       </div>
 
       {/* ============ MOBILE BOTTOM NAVIGATION ============ */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-[#020618]/95 backdrop-blur-md border-t border-gray-800/50 z-50">
+      <div
+        ref={mobileNavRef}
+        className="md:hidden fixed bottom-0 left-0 right-0 bg-[#020618]/95 backdrop-blur-md border-t border-gray-800/50 z-50"
+      >
         <div className="grid grid-cols-4 gap-2 px-4 py-3">
           {navItems.map((item) => (
             <div
@@ -355,7 +354,6 @@ const Navbar = () => {
               onClick={() => handleNavClick(item)}
               className="flex flex-col items-center justify-center cursor-pointer group relative"
             >
-              {/* Active Dot */}
               <div
                 className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#2AA1FF] to-[#00CEF3] transition-all duration-300 mb-1.5 ${
                   activeNav === item
@@ -364,7 +362,6 @@ const Navbar = () => {
                 }`}
               />
 
-              {/* Label */}
               <h1
                 className={`font-semibold text-xs transition-all duration-300 text-center ${
                   activeNav === item
@@ -375,7 +372,6 @@ const Navbar = () => {
                 {item}
               </h1>
 
-              {/* Top Border Indicator */}
               {activeNav === item && (
                 <div className="absolute -top-[17px] left-0 right-0 h-0.5 bg-gradient-to-r from-[#2AA1FF] to-[#00CEF3] rounded-full animate-slideIn" />
               )}
