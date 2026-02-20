@@ -10,7 +10,7 @@ import News from "./pages/News.jsx";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 const App = () => {
   return (
-    <TonConnectUIProvider manifestUrl="https://stakington.netlify.app/tonconnect-manifest.json">
+    <TonConnectUIProvider manifestUrl="https://stakee-theta.vercel.app/tonconnect-manifest.json">
       <>
         <Navbar />
         <Routes>
