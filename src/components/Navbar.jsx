@@ -13,7 +13,7 @@ import {
 import { MdOutlineLogout, MdAppShortcut } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { useTonConnectUI } from "@tonconnect/ui-react";
-import { TonClient } from "ton";
+// TonClient imported dynamically inside useEffect to avoid runtime crash
 import { gsap } from "gsap";
 
 const Navbar = () => {
@@ -32,10 +32,6 @@ const Navbar = () => {
   const walletBtnRef = useRef(null);
   const mobileNavRef = useRef(null);
 
-  const client = new TonClient({
-    endpoint: "https://toncenter.com/api/v2/jsonRPC",
-  });
-
   // ============ FETCH BALANCE ============
   useEffect(() => {
     if (!tonConnectUI.wallet) {
@@ -47,6 +43,10 @@ const Navbar = () => {
 
     const fetchBalance = async () => {
       try {
+        const { TonClient } = await import("ton");
+        const client = new TonClient({
+          endpoint: "https://toncenter.com/api/v2/jsonRPC",
+        });
         const info = await client.getAccount(address);
         setBalance((Number(info.balance) / 1e9).toFixed(2));
       } catch (e) {
