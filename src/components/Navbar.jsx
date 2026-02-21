@@ -1,8 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MdAccountBalanceWallet } from "react-icons/md";
 import { PiWalletFill } from "react-icons/pi";
-import { FaChevronDown, FaCopy, FaCheck } from "react-icons/fa6";
-import { MdOutlineLogout } from "react-icons/md";
+import {
+  FaChevronDown,
+  FaCopy,
+  FaCheck,
+  FaHome,
+  FaNewspaper,
+  FaBriefcase,
+  FaCog,
+} from "react-icons/fa";
+import { MdOutlineLogout, MdAppShortcut } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { useTonConnectUI } from "@tonconnect/ui-react";
 import { TonClient } from "ton";
@@ -54,28 +62,22 @@ const Navbar = () => {
 
   // ============ GSAP ANIMATIONS ============
   useEffect(() => {
-    // Pehle navbar ko visible rakho
     gsap.set(navRef.current, { y: 0, opacity: 1 });
     gsap.set(logoRef.current, { scale: 1, opacity: 1 });
     gsap.set(navItemsRef.current, { y: 0, opacity: 1 });
     gsap.set(walletBtnRef.current, { scale: 1, opacity: 1 });
     gsap.set(mobileNavRef.current, { y: 0, opacity: 1 });
 
-    // Thoda delay do taake pehle render ho jaye
     requestAnimationFrame(() => {
       setAnimationsStarted(true);
-
-      // Ab animations chalao but starting point se nahi, current position se
       const tl = gsap.timeline();
 
-      // Logo subtle animation
       tl.fromTo(
         logoRef.current,
         { scale: 0.9, opacity: 0.9 },
         { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.2)" }
       );
 
-      // Nav items subtle stagger
       tl.fromTo(
         navItemsRef.current,
         { y: -5, opacity: 0.9 },
@@ -83,7 +85,6 @@ const Navbar = () => {
         "-=0.3"
       );
 
-      // Wallet button subtle animation
       tl.fromTo(
         walletBtnRef.current,
         { scale: 0.95, opacity: 0.9 },
@@ -115,20 +116,36 @@ const Navbar = () => {
   // ============ FORMAT ADDRESS ============
   const formatAddress = (address) => {
     if (!address) return "";
-    return `${address.slice(0, 6)}...${address.slice(-4)}`;
+    return `${address.slice(0, 4)}...${address.slice(-4)}`;
+  };
+
+  // Get icon for mobile nav
+  const getNavIcon = (item) => {
+    switch (item) {
+      case "Home":
+        return <FaHome className="w-5 h-5" />;
+      case "App":
+        return <MdAppShortcut className="w-5 h-5" />;
+      case "Institutional":
+        return <FaBriefcase className="w-5 h-5" />;
+      case "News":
+        return <FaNewspaper className="w-5 h-5" />;
+      default:
+        return null;
+    }
   };
 
   const navItems = ["Home", "App", "Institutional", "News"];
 
   return (
     <div>
-      {/* ============ DESKTOP NAVBAR ============ */}
+      {/* ============ DESKTOP NAVBAR (hidden on mobile) ============ */}
       <div
         ref={navRef}
         className="hidden md:block bg-[#020618]/95 backdrop-blur-md w-full h-20 border-b fixed z-50 border-gray-800/50 shadow-lg shadow-black/20"
       >
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center h-full">
-          {/* Logo with Animation */}
+          {/* Logo */}
           <div
             ref={logoRef}
             className="flex items-center gap-3 cursor-pointer group"
@@ -149,7 +166,7 @@ const Navbar = () => {
             </span>
           </div>
 
-          {/* Navigation Links */}
+          {/* Desktop Navigation Links */}
           <div className="flex gap-8">
             {navItems.map((item, index) => (
               <div
@@ -175,7 +192,7 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Wallet Section */}
+          {/* Desktop Wallet Section */}
           <div ref={walletBtnRef} className="relative">
             <div className="flex bg-gradient-to-r from-[#2AA1FF] to-[#00CEF3] gap-3 items-center rounded-xl h-11 px-5 hover:scale-105 transition-all duration-300 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
@@ -268,123 +285,143 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-
-      {/* ============ MOBILE NAVBAR ============ */}
-      <div className="md:hidden bg-[#020618]/95 backdrop-blur-md w-full h-16 border-b fixed z-50 border-gray-800/50">
+      {/* ============ MOBILE TOP BAR ============ */}
+      <div className="md:hidden bg-[#020618]/95 backdrop-blur-md w-full h-16 border-b fixed top-0 z-50 border-gray-800/50">
         <div className="px-4 flex justify-between items-center h-full">
+          {/* Logo */}
           <div
-            className="flex items-center gap-2 cursor-pointer group"
+            className="flex items-center gap-2 cursor-pointer"
             onClick={() => handleNavClick("Home")}
           >
             <div className="relative w-9 h-9 flex justify-center items-center rounded-xl bg-gradient-to-br from-[#2AA1FF] to-[#00CEF3]">
               <MdAccountBalanceWallet className="text-white w-5 h-5" />
-              <div className="absolute -inset-1 bg-gradient-to-br from-[#2AA1FF] to-[#00CEF3] rounded-xl blur opacity-30"></div>
             </div>
             <h1 className="text-white font-bold text-xl">Stakee</h1>
+            <span className="text-[8px] font-medium text-[#2AA1FF] bg-blue-500/10 px-1 py-0.5 rounded-full">
+              BETA
+            </span>
           </div>
 
+          {/* Mobile Wallet Button */}
           <div
             onClick={() =>
               !tonConnectUI.wallet
                 ? tonConnectUI.openModal()
                 : setShowDisconnect(!showDisconnect)
             }
-            className="flex bg-gradient-to-r from-[#2AA1FF] to-[#00CEF3] gap-2 items-center rounded-xl h-10 px-4 cursor-pointer active:scale-95 transition-all duration-300 shadow-lg shadow-blue-500/30"
+            className="flex bg-gradient-to-r from-[#2AA1FF] to-[#00CEF3] gap-1.5 items-center rounded-xl h-9 px-3 cursor-pointer active:scale-95 transition-all duration-300 shadow-lg shadow-blue-500/30"
           >
             <PiWalletFill className="text-white w-4 h-4" />
 
             {!tonConnectUI.wallet ? (
-              <span className="text-white font-semibold text-sm">Connect</span>
+              <span className="text-white font-semibold text-xs">Connect</span>
             ) : (
-              <div className="relative">
-                <span className="text-white font-semibold text-sm font-mono">
-                  {formatAddress(tonConnectUI.wallet?.account?.address)}
-                </span>
-
-                {showDisconnect && (
-                  <>
-                    <div
-                      className="fixed inset-0 z-40"
-                      onClick={() => setShowDisconnect(false)}
-                    />
-                    <div className="absolute top-full right-0 mt-2 bg-[#0A0F1C] border border-gray-700/50 rounded-xl p-4 min-w-[240px] shadow-2xl z-50 backdrop-blur-xl">
-                      <div className="text-gray-400 text-xs mb-2">
-                        Wallet Address
-                      </div>
-                      <div className="text-white text-xs font-mono mb-4 break-all bg-white/5 p-3 rounded-lg">
-                        {tonConnectUI.wallet?.account?.address || "N/A"}
-                      </div>
-
-                      {balance && (
-                        <div className="flex items-center justify-between mb-4 bg-gradient-to-r from-[#2AA1FF]/10 to-[#00CEF3]/10 rounded-lg p-3">
-                          <span className="text-gray-400 text-xs">Balance</span>
-                          <span className="text-white font-bold text-sm">
-                            {balance} TON
-                          </span>
-                        </div>
-                      )}
-
-                      <button
-                        onClick={() => {
-                          tonConnectUI.disconnect();
-                          setShowDisconnect(false);
-                        }}
-                        className="w-full bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white text-sm px-4 py-2.5 rounded-lg transition-all duration-300"
-                      >
-                        Disconnect
-                      </button>
-                    </div>
-                  </>
-                )}
-              </div>
+              <span className="text-white font-semibold text-xs font-mono">
+                {formatAddress(tonConnectUI.wallet?.account?.address)}
+              </span>
             )}
           </div>
         </div>
-      </div>
 
-      {/* ============ MOBILE BOTTOM NAVIGATION ============ */}
+        {/* Mobile Disconnect Dropdown */}
+        {showDisconnect && tonConnectUI.wallet && (
+          <>
+            <div
+              className="fixed inset-0 z-40"
+              onClick={() => setShowDisconnect(false)}
+            />
+            <div className="absolute top-16 right-4 left-4 bg-[#0A0F1C] border border-gray-700/50 rounded-xl p-4 shadow-2xl z-50 backdrop-blur-xl animate-slideDown">
+              <div className="text-gray-400 text-xs mb-2 font-medium">
+                Wallet Address
+              </div>
+              <div className="text-white text-xs font-mono mb-4 break-all bg-white/5 p-3 rounded-lg">
+                {tonConnectUI.wallet?.account?.address || "N/A"}
+              </div>
+
+              <div className="flex items-center justify-between mb-4 bg-gradient-to-r from-[#2AA1FF]/10 to-[#00CEF3]/10 rounded-lg p-3">
+                <span className="text-gray-400 text-xs">Balance</span>
+                <span className="text-white font-bold text-sm">
+                  {balance || "0.00"} TON
+                </span>
+              </div>
+
+              <div className="flex gap-2">
+                <button
+                  onClick={copyAddress}
+                  className="flex-1 bg-white/5 hover:bg-white/10 text-white text-sm px-3 py-2.5 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  {copied ? (
+                    <>
+                      <FaCheck className="w-4 h-4 text-green-400" />
+                      <span>Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <FaCopy className="w-4 h-4" />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </button>
+                <button
+                  onClick={() => {
+                    tonConnectUI.disconnect();
+                    setShowDisconnect(false);
+                  }}
+                  className="flex-1 bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white text-sm px-3 py-2.5 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  <MdOutlineLogout className="w-4 h-4" />
+                  Disconnect
+                </button>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+      {/* ============ MOBILE BOTTOM NAVIGATION (ALL BUTTONS VISIBLE) ============ */}
       <div
         ref={mobileNavRef}
-        className="md:hidden fixed bottom-0 left-0 right-0 bg-[#020618]/95 backdrop-blur-md border-t border-gray-800/50 z-50"
+        className="md:hidden fixed bottom-0 left-0 right-0 bg-[#020618]/95 backdrop-blur-md border-t border-gray-800/50 z-50 pb-safe"
+        style={{ paddingBottom: "env(safe-area-inset-bottom, 4px)" }}
       >
-        <div className="grid grid-cols-4 gap-2 px-4 py-3">
+        <div className="grid grid-cols-4 gap-1 px-1 py-2">
           {navItems.map((item) => (
-            <div
+            <button
               key={item}
               onClick={() => handleNavClick(item)}
-              className="flex flex-col items-center justify-center cursor-pointer group relative"
+              className={`flex flex-col items-center justify-center py-2 px-1 rounded-xl transition-all duration-300 ${
+                activeNav === item
+                  ? "bg-gradient-to-r from-[#2AA1FF]/20 to-[#00CEF3]/20"
+                  : "active:bg-white/5"
+              }`}
             >
               <div
-                className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#2AA1FF] to-[#00CEF3] transition-all duration-300 mb-1.5 ${
+                className={`mb-1 transition-all duration-300 ${
                   activeNav === item
-                    ? "opacity-100 scale-100"
-                    : "opacity-0 scale-0 group-hover:opacity-50 group-hover:scale-100"
-                }`}
-              />
-
-              <h1
-                className={`font-semibold text-xs transition-all duration-300 text-center ${
-                  activeNav === item
-                    ? "text-transparent bg-clip-text bg-gradient-to-r from-[#2AA1FF] to-[#00CEF3] font-bold"
-                    : "text-gray-400 group-hover:text-white"
+                    ? "text-[#2AA1FF]"
+                    : "text-gray-400"
                 }`}
               >
-                {item}
-              </h1>
+                {getNavIcon(item)}
+              </div>
+              <span
+                className={`text-[10px] font-medium transition-all duration-300 ${
+                  activeNav === item
+                    ? "text-[#2AA1FF] font-bold"
+                    : "text-gray-400"
+                }`}
+              >
+                {item === "Institutional" ? "Inst." : item}
+              </span>
 
               {activeNav === item && (
-                <div className="absolute -top-[17px] left-0 right-0 h-0.5 bg-gradient-to-r from-[#2AA1FF] to-[#00CEF3] rounded-full animate-slideIn" />
+                <div className="absolute -top-[1px] left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-gradient-to-r from-[#2AA1FF] to-[#00CEF3] rounded-full" />
               )}
-            </div>
+            </button>
           ))}
         </div>
       </div>
-
-      {/* ============ SPACERS ============ */}
-      <div className="hidden md:block h-20"></div>
-      <div className="md:hidden h-16"></div>
-      <div className="md:hidden h-16"></div>
-
+      {/* ============ SPACER FOR FIXED NAVBAR ============ */}
+      <div className="h-16 md:h-20"></div>
       <style jsx>{`
         @keyframes slideIn {
           from {
