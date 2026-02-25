@@ -142,7 +142,7 @@ const Navbar = () => {
       {/* ============ DESKTOP NAVBAR (hidden on mobile) ============ */}
       <div
         ref={navRef}
-        className="hidden md:block bg-[#020618]/95 backdrop-blur-md w-full h-20 border-b fixed z-50 border-gray-800/50 shadow-lg shadow-black/20"
+        className="hidden md:block bg-black w-full h-20 fixed z-50 border-b border-gray-800"
       >
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center h-full">
           {/* Logo */}
@@ -151,9 +151,9 @@ const Navbar = () => {
             className="flex items-center gap-3 cursor-pointer group"
             onClick={() => handleNavClick("Home")}
           >
-            <div className="relative w-11 h-11 flex justify-center items-center rounded-xl bg-gradient-to-br from-[#2AA1FF] to-[#00CEF3] transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-blue-500/30">
+            <div className="relative w-11 h-11 flex justify-center items-center rounded-xl bg-gradient-to-br from-[#2AA1FF] to-[#00CEF3] transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
               <MdAccountBalanceWallet className="text-white w-7 h-7" />
-              <div className="absolute -inset-1 bg-gradient-to-br from-[#2AA1FF] to-[#00CEF3] rounded-xl blur opacity-30 group-hover:opacity-60 animate-pulse"></div>
+              {/* Removed the blur effect that could cause shadows */}
             </div>
             <div className="relative">
               <h1 className="text-white font-bold text-2xl tracking-tight">
@@ -187,15 +187,15 @@ const Navbar = () => {
                 {activeNav === item && (
                   <div className="absolute -bottom-[22px] left-0 right-0 h-0.5 bg-gradient-to-r from-[#2AA1FF] to-[#00CEF3] rounded-full animate-slideIn" />
                 )}
-                <div className="absolute -bottom-[22px] left-0 right-0 h-0.5 bg-gradient-to-r from-[#2AA1FF]/50 to-[#00CEF3]/50 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                {/* Removed the hover effect line that might cause shadows */}
               </div>
             ))}
           </div>
 
           {/* Desktop Wallet Section */}
           <div ref={walletBtnRef} className="relative">
-            <div className="flex bg-gradient-to-r from-[#2AA1FF] to-[#00CEF3] gap-3 items-center rounded-xl h-11 px-5 hover:scale-105 transition-all duration-300 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+            <div className="flex bg-gradient-to-r from-[#2AA1FF] to-[#00CEF3] gap-3 items-center rounded-xl h-11 px-5 hover:scale-105 transition-all duration-300 overflow-hidden group">
+              {/* Removed the white overlay animation that could cause shadows */}
 
               <PiWalletFill className="text-white w-5 h-5" />
 
@@ -228,7 +228,7 @@ const Navbar = () => {
                         className="fixed inset-0 z-40"
                         onClick={() => setShowDisconnect(false)}
                       />
-                      <div className="absolute top-full right-0 mt-2 bg-[#0A0F1C] border border-gray-700/50 rounded-xl p-4 min-w-[260px] shadow-2xl shadow-black/50 z-50 backdrop-blur-xl animate-slideDown">
+                      <div className="absolute top-full right-0 mt-2 bg-black border border-gray-700 rounded-xl p-4 min-w-[260px] z-50 animate-slideDown">
                         <div className="flex items-center justify-between mb-3">
                           <span className="text-gray-400 text-xs font-medium">
                             Wallet Address
@@ -286,7 +286,7 @@ const Navbar = () => {
         </div>
       </div>
       {/* ============ MOBILE TOP BAR ============ */}
-      <div className="md:hidden bg-[#020618]/95 backdrop-blur-md w-full h-16 border-b fixed top-0 z-50 border-gray-800/50">
+      <div className="md:hidden bg-black w-full h-16 border-b fixed top-0 z-50 border-gray-800">
         <div className="px-4 flex justify-between items-center h-full">
           {/* Logo */}
           <div
@@ -309,7 +309,7 @@ const Navbar = () => {
                 ? tonConnectUI.openModal()
                 : setShowDisconnect(!showDisconnect)
             }
-            className="flex bg-gradient-to-r from-[#2AA1FF] to-[#00CEF3] gap-1.5 items-center rounded-xl h-9 px-3 cursor-pointer active:scale-95 transition-all duration-300 shadow-lg shadow-blue-500/30"
+            className="flex bg-gradient-to-r from-[#2AA1FF] to-[#00CEF3] gap-1.5 items-center rounded-xl h-9 px-3 cursor-pointer active:scale-95 transition-all duration-300"
           >
             <PiWalletFill className="text-white w-4 h-4" />
 
@@ -330,7 +330,7 @@ const Navbar = () => {
               className="fixed inset-0 z-40"
               onClick={() => setShowDisconnect(false)}
             />
-            <div className="absolute top-16 right-4 left-4 bg-[#0A0F1C] border border-gray-700/50 rounded-xl p-4 shadow-2xl z-50 backdrop-blur-xl animate-slideDown">
+            <div className="absolute top-16 right-4 left-4 bg-black border border-gray-700 rounded-xl p-4 z-50 animate-slideDown">
               <div className="text-gray-400 text-xs mb-2 font-medium">
                 Wallet Address
               </div>
@@ -380,7 +380,7 @@ const Navbar = () => {
       {/* ============ MOBILE BOTTOM NAVIGATION (ALL BUTTONS VISIBLE) ============ */}
       <div
         ref={mobileNavRef}
-        className="md:hidden fixed bottom-0 left-0 right-0 bg-[#020618]/95 backdrop-blur-md border-t border-gray-800/50 z-50 pb-safe"
+        className="md:hidden fixed bottom-0 left-0 right-0 bg-black border-t border-gray-800 z-50 pb-safe"
         style={{ paddingBottom: "env(safe-area-inset-bottom, 4px)" }}
       >
         <div className="grid grid-cols-4 gap-1 px-1 py-2">
